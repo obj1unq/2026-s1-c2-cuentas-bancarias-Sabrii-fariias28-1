@@ -10,9 +10,9 @@ test "Compra de viveres y reparaciones" {
 
     casa.romper(1000)
 
-    assert.that(!casa.hayViveresSuficientes())
+    assert.notThat(casa.hayViveresSuficientes())
     assert.that(casa.hayQueHacerReparaciones())
-    assert.that(!casa.enOrden())
+    assert.notThat(casa.enOrden())
 
     casa.comprarViveres(80, 2)
 
@@ -24,13 +24,13 @@ test "Compra de viveres y reparaciones" {
 
     assert.that(casa.hayViveresSuficientes())
     assert.equals(50, casa.cantidadViveres())
-    assert.that(!casa.enOrden())
+    assert.notThat(casa.enOrden())
     assert.equals(1960, cuentaCorriente.saldo())
     assert.equals(40, casa.gastosTotalAlMes())
 
     casa.hacerReparaciones()
 
-    assert.that(!casa.hayQueHacerReparaciones())
+    assert.notThat(casa.hayQueHacerReparaciones())
     assert.that(casa.enOrden())
     assert.equals(960, cuentaCorriente.saldo())
     assert.equals(1040, casa.gastosTotalAlMes())
