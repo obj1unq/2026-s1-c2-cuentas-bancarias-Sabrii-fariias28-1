@@ -1,9 +1,51 @@
 import casa.*
+import cuentas.*
+
 
 describe "casa de pepe y julian" {
 
-  // Descomentar si hiciera falta un metodo para inicializar el ambiente
-  // method initialize() {
-  // }
+  test "Cuenta corriente"{
+    casa.saldoCuenta(300)
+    assert.equals(0, casa.gastosTotalAlMes())
+    assert.equals(300, casa.saldo())
+
+    casa.gastar(200)
+    assert.equals(200, casa.gastosTotalAlMes())
+    assert.equals(100, casa.saldo())
+
+    casa.gastar(400)
+    assert.equals(600, casa.gastosTotalAlMes())
+    assert.equals(-300, casa.saldo())
+
+    casa.cambiarMes()
+  }
+
+  test "Cuenta con Gastos: Caso normal" {
+    casa.cambiarACuenta(cuentaGastos)
+    cuentaGastos.costoPorOperacion(20)
+    casa.depositar(1000)
+
+    assert.equals(980,casa.saldo())
+    casa.gastar(580)
+    assert.equals(400,casa.saldo())
+    casa.gastar(500)
+    assert.equals(-100,casa.saldo())
+    
+    casa.depositar(150)
+    assert.equals(30,casa.saldo())
+  }
+
+  test "Cuenta con Gastos: Caso sin saldo sificiente"{
+    casa.cambiarACuenta(cuentaGastos)
+    cuentaGastos.costoPorOperacion(20)
+
+    casa.depositar(10)
+    assert.equals(0,casa.saldo())
+  }
 
 }
+
+
+/*  // Descomentar si hiciera falta un metodo para inicializar el ambiente
+  // method initialize() {
+  // }*/
